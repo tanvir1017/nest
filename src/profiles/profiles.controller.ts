@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   HttpCode,
+  HttpException,
   HttpStatus,
   Param,
   Post,
@@ -25,7 +26,11 @@ export class ProfilesController {
   // GET /profiles/unique/:id
   @Get('unique/:u_id')
   findUnique(@Param('u_id') u_id: string) {
-    return this.profilesService.findUnique(u_id);
+    // return this.profilesService.findUnique(u_id);
+    throw new HttpException(
+      `Profile with id ${u_id} not found`,
+      HttpStatus.NOT_FOUND,
+    );
   }
   // POST /profiles
   @Post()
